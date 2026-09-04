@@ -178,6 +178,10 @@
         "ocsp": "OCSP",
         "crl": "CRL"
       },
+      "revokedSummary": {
+        "heading": "Este certificado ha sido revocado",
+        "revokedAt": "Revocado el {date}"
+      },
       "revocation": {
         "heading": "Revocación",
         "status": {

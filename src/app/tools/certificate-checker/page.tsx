@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode, useRef, useState } from "react";
-import { Upload, X } from "lucide-react";
+import { ShieldX, Upload, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ToolLayout } from "@/components/tool-layout";
 import { Panel } from "@/components/panel";
@@ -253,6 +253,25 @@ export default function CertificateCheckerPage() {
 
       {cert && revocation && validityStatus && (
         <>
+          {revocation.status === "revoked" && (
+            <div className="flex items-start gap-3 rounded-md border border-red-500/40 bg-red-500/10 p-4">
+              <ShieldX size={24} className="mt-0.5 shrink-0 text-red-600 dark:text-red-400" />
+              <div className="flex flex-col gap-1">
+                <span className="text-lg font-semibold text-red-700 dark:text-red-400">
+                  {t("revokedSummary.heading")}
+                </span>
+                <span className="break-all text-sm text-red-700/80 dark:text-red-400/80">
+                  {cert.subject}
+                </span>
+                {revocation.revokedAt && (
+                  <span className="text-sm text-red-700/80 dark:text-red-400/80">
+                    {t("revokedSummary.revokedAt", { date: formatDate(revocation.revokedAt) })}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
           <Panel label={t("validity.heading")}>
             <div className="flex flex-col divide-y divide-border/50">
               <div className="flex items-center justify-between py-1">
