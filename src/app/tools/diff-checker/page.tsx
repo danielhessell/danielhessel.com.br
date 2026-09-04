@@ -15,12 +15,16 @@ import {
   toSideBySideRows,
 } from "@/lib/formatters/diff";
 
+const MAX_FILES = 6;
+
+type DiffFile = { id: string; label: string; content: string };
+
 function FileUploadButton({
   label,
   onFile,
 }: {
   label: string;
-  onFile: (text: string) => void;
+  onFile: (text: string, filename: string) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,7 +46,7 @@ function FileUploadButton({
         onChange={async (e) => {
           const file = e.target.files?.[0];
           if (!file) return;
-          onFile(await file.text());
+          onFile(await file.text(), file.name);
           e.target.value = "";
         }}
       />
@@ -50,13 +54,14 @@ function FileUploadButton({
   );
 }
 
-// Picks both sides in one go: first selected file -> original, second -> modified.
-function TwoFilesUploadButton({
+// Accepts any number of files in one pick — the caller decides what to do
+// with them (replace the whole set when there's more than one).
+function MultiFilesUploadButton({
   label,
   onFiles,
 }: {
   label: string;
-  onFiles: (original: string, modified: string | null) => void;
+  onFiles: (files: { name: string; text: string }[]) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -77,14 +82,15 @@ function TwoFilesUploadButton({
         multiple
         className="hidden"
         onChange={async (e) => {
-          const files = e.target.files;
-          if (!files || files.length === 0) return;
-          const [first, second] = await Promise.all(
-            Array.from(files)
-              .slice(0, 2)
-              .map((file) => file.text()),
+          const fileList = e.target.files;
+          if (!fileList || fileList.length === 0) return;
+          const files = await Promise.all(
+            Array.from(fileList).map(async (file) => ({
+              name: file.name,
+              text: await file.text(),
+            })),
           );
-          onFiles(first, second ?? null);
+          onFiles(files);
           e.target.value = "";
         }}
       />
@@ -92,12 +98,20 @@ function TwoFilesUploadButton({
   );
 }
 
-export default function DiffCheckerPage() {
+function DiffResult({
+  base,
+  file,
+  showHeading,
+}: {
+  base: DiffFile;
+  file: DiffFile;
+  showHeading: boolean;
+}) {
   const t = useTranslations("tools.diffChecker");
-  const [original, setOriginal] = useState("");
-  const [modified, setModified] = useState("");
-
-  const changes = useMemo(() => computeLineDiff(original, modified), [original, modified]);
+  const changes = useMemo(
+    () => computeLineDiff(base.content, file.content),
+    [base.content, file.content],
+  );
   const stats = useMemo(() => diffStats(changes), [changes]);
   const rows = useMemo(() => toSideBySideRows(changes), [changes]);
 
@@ -108,49 +122,12 @@ export default function DiffCheckerPage() {
   ];
 
   return (
-    <ToolLayout title={t("title")} description={t("description")}>
-      <div>
-        <TwoFilesUploadButton
-          label={t("uploadBoth")}
-          onFiles={(first, second) => {
-            setOriginal(first);
-            if (second !== null) setModified(second);
-          }}
-        />
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Panel
-          label={
-            <span className="flex items-center gap-2">
-              {t("labels.original")}
-              <FileUploadButton label={t("uploadFile")} onFile={setOriginal} />
-            </span>
-          }
-        >
-          <Textarea
-            rows={10}
-            value={original}
-            onChange={(e) => setOriginal(e.target.value)}
-            placeholder={t("placeholder")}
-          />
-        </Panel>
-        <Panel
-          label={
-            <span className="flex items-center gap-2">
-              {t("labels.modified")}
-              <FileUploadButton label={t("uploadFile")} onFile={setModified} />
-            </span>
-          }
-        >
-          <Textarea
-            rows={10}
-            value={modified}
-            onChange={(e) => setModified(e.target.value)}
-            placeholder={t("placeholder")}
-          />
-        </Panel>
-      </div>
-
+    <div className="flex flex-col gap-3">
+      {showHeading && (
+        <h2 className="text-sm font-medium text-foreground/80">
+          {t("compareHeading", { base: base.label, file: file.label })}
+        </h2>
+      )}
       <div className="grid grid-cols-3 gap-3">
         {statItems.map((item) => (
           <div key={item.label} className="rounded-md border border-border p-3">
@@ -207,6 +184,75 @@ export default function DiffCheckerPage() {
             </div>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+export default function DiffCheckerPage() {
+  const t = useTranslations("tools.diffChecker");
+  const [files, setFiles] = useState<DiffFile[]>(() => [
+    { id: crypto.randomUUID(), label: t("labels.original"), content: "" },
+    { id: crypto.randomUUID(), label: t("labels.modified"), content: "" },
+  ]);
+
+  function updateFile(id: string, patch: Partial<DiffFile>) {
+    setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, ...patch } : f)));
+  }
+
+  // Selecting just one file behaves like the per-panel button (replaces the
+  // first slot); selecting several replaces the whole set — that's how N
+  // files beyond the default two get onto the screen, no manual "add" step.
+  function handleMultiUpload(uploaded: { name: string; text: string }[]) {
+    if (uploaded.length === 0) return;
+    if (uploaded.length === 1) {
+      updateFile(files[0].id, { content: uploaded[0].text, label: uploaded[0].name });
+      return;
+    }
+    setFiles(
+      uploaded
+        .slice(0, MAX_FILES)
+        .map(({ name, text }) => ({ id: crypto.randomUUID(), label: name, content: text })),
+    );
+  }
+
+  const base = files[0];
+  const others = files.slice(1);
+
+  return (
+    <ToolLayout title={t("title")} description={t("description")}>
+      <div>
+        <MultiFilesUploadButton label={t("uploadBoth")} onFiles={handleMultiUpload} />
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        {files.map((file) => (
+          <Panel
+            key={file.id}
+            label={
+              <span className="flex items-center gap-2">
+                {file.label}
+                <FileUploadButton
+                  label={t("uploadFile")}
+                  onFile={(text, name) => updateFile(file.id, { content: text, label: name })}
+                />
+              </span>
+            }
+          >
+            <Textarea
+              rows={10}
+              value={file.content}
+              onChange={(e) => updateFile(file.id, { content: e.target.value })}
+              placeholder={t("placeholder")}
+            />
+          </Panel>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-8">
+        {others.map((file) => (
+          <DiffResult key={file.id} base={base} file={file} showHeading={others.length > 1} />
+        ))}
       </div>
     </ToolLayout>
   );

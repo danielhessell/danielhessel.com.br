@@ -116,10 +116,11 @@
     },
     "diffChecker": {
       "title": "Diff Checker",
-      "description": "Compare two files or blocks of text and see what changed.",
+      "description": "Compare files or blocks of text and see what changed.",
       "placeholder": "Paste or type text here...",
       "uploadFile": "Upload file",
-      "uploadBoth": "Upload both files",
+      "uploadBoth": "Upload files",
+      "compareHeading": "{base} vs {file}",
       "labels": {
         "original": "Original",
         "modified": "Modified"

@@ -116,10 +116,11 @@
     },
     "diffChecker": {
       "title": "Comparador de Diferenças",
-      "description": "Compare dois arquivos ou blocos de texto e veja o que mudou.",
+      "description": "Compare arquivos ou blocos de texto e veja o que mudou.",
       "placeholder": "Cole ou digite o texto aqui...",
       "uploadFile": "Enviar arquivo",
-      "uploadBoth": "Enviar os dois arquivos",
+      "uploadBoth": "Enviar arquivos",
+      "compareHeading": "{base} vs {file}",
       "labels": {
         "original": "Original",
         "modified": "Modificado"
