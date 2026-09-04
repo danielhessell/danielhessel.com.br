@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ToolLayout } from "@/components/tool-layout";
 import { Panel } from "@/components/panel";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +9,7 @@ import { WarningBanner } from "@/components/warning-banner";
 import { hashText } from "@/lib/formatters/hash";
 
 export default function HashGeneratorPage() {
+  const t = useTranslations("tools.hashGenerator");
   const [input, setInput] = useState("Hello, world!");
   const [hashes, setHashes] = useState({ md5: "", sha1: "", sha256: "" });
 
@@ -22,11 +24,8 @@ export default function HashGeneratorPage() {
   }, [input]);
 
   return (
-    <ToolLayout
-      title="Hash Generator"
-      description="MD5, SHA-1 and SHA-256 digests of text."
-    >
-      <WarningBanner message="MD5 and SHA-1 are broken for security purposes — use them only for checksums, not for passwords or integrity against a malicious actor." />
+    <ToolLayout title={t("title")} description={t("description")}>
+      <WarningBanner message={t("warning")} />
       <Textarea
         rows={6}
         value={input}

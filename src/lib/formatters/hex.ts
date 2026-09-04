@@ -1,21 +1,23 @@
-import type { FormatResult } from "@/lib/formatters/json";
+export type HexResult =
+  | { ok: true; value: string }
+  | { ok: false; errorCode: "invalidHex" };
 
-export function encodeHex(input: string): FormatResult {
+export function encodeHex(input: string): HexResult {
   try {
     const bytes = new TextEncoder().encode(input);
     const hex = Array.from(bytes)
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
     return { ok: true, value: hex };
-  } catch (e) {
-    return { ok: false, error: (e as Error).message };
+  } catch {
+    return { ok: false, errorCode: "invalidHex" };
   }
 }
 
-export function decodeHex(input: string): FormatResult {
+export function decodeHex(input: string): HexResult {
   const cleaned = input.trim().replace(/\s+/g, "");
   if (!/^[0-9a-fA-F]*$/.test(cleaned) || cleaned.length % 2 !== 0) {
-    return { ok: false, error: "Invalid hex input." };
+    return { ok: false, errorCode: "invalidHex" };
   }
   try {
     const bytes = new Uint8Array(cleaned.length / 2);
@@ -24,6 +26,6 @@ export function decodeHex(input: string): FormatResult {
     }
     return { ok: true, value: new TextDecoder().decode(bytes) };
   } catch {
-    return { ok: false, error: "Invalid hex input." };
+    return { ok: false, errorCode: "invalidHex" };
   }
 }

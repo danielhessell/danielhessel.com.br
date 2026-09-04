@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ToolLayout } from "@/components/tool-layout";
 import { Panel } from "@/components/panel";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +10,8 @@ import { ErrorBanner } from "@/components/error-banner";
 import { formatXmlPretty, minifyXml } from "@/lib/formatters/xml";
 
 export default function XmlFormatterPage() {
+  const t = useTranslations("tools.xmlFormatter");
+  const tCommon = useTranslations("common");
   const [input, setInput] = useState("<root><child>value</child></root>");
   const [mode, setMode] = useState<"format" | "minify">("format");
 
@@ -18,33 +21,30 @@ export default function XmlFormatterPage() {
   );
 
   return (
-    <ToolLayout
-      title="XML Formatter"
-      description="Pretty-print and minify XML."
-    >
+    <ToolLayout title={t("title")} description={t("description")}>
       <div className="flex gap-2">
         <Button
           variant={mode === "format" ? "primary" : "secondary"}
           onClick={() => setMode("format")}
         >
-          Pretty-print
+          {tCommon("prettyPrint")}
         </Button>
         <Button
           variant={mode === "minify" ? "primary" : "secondary"}
           onClick={() => setMode("minify")}
         >
-          Minify
+          {tCommon("minify")}
         </Button>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Panel label="Input">
+        <Panel label={tCommon("input")}>
           <Textarea
             rows={16}
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
         </Panel>
-        <Panel label="Output" copyValue={result.ok ? result.value : ""}>
+        <Panel label={tCommon("output")} copyValue={result.ok ? result.value : ""}>
           {result.ok ? (
             <Textarea rows={16} readOnly value={result.value} />
           ) : (

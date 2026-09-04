@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "githubLabel": "View source on GitHub"
+  },
+  "common": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "input": "Input",
+    "output": "Output",
+    "preview": "Preview",
+    "encode": "Encode",
+    "decode": "Decode",
+    "prettyPrint": "Pretty-print",
+    "minify": "Minify",
+    "generate": "Generate",
+    "result": "Result",
+    "convert": "Convert",
+    "count": "Count"
+  },
+  "toolsHub": {
+    "title": "Dev Tools",
+    "subtitle": "Small utilities I keep needing. Everything runs in your browser — nothing is sent to a server.",
+    "metaTitle": "Dev Tools — Daniel Hessel",
+    "metaDescription": "Everyday developer utilities."
+  },
+  "tools": {
+    "textCounter": {
+      "title": "Text Counter",
+      "description": "Count characters, words and lines.",
+      "placeholder": "Paste or type text here...",
+      "stats": {
+        "characters": "Characters",
+        "charactersNoSpaces": "Characters (no spaces)",
+        "words": "Words",
+        "lines": "Lines"
+      }
+    },
+    "jsonFormatter": {
+      "title": "JSON Formatter",
+      "description": "Pretty-print, minify and validate JSON."
+    },
+    "xmlFormatter": {
+      "title": "XML Formatter",
+      "description": "Pretty-print and minify XML."
+    },
+    "markdownPreviewer": {
+      "title": "Markdown Previewer",
+      "description": "Live preview of GitHub-flavored Markdown."
+    },
+    "base64": {
+      "title": "Base64 Encode/Decode",
+      "description": "Convert text to and from Base64.",
+      "errors": {
+        "invalid": "Invalid Base64 input."
+      }
+    },
+    "hex": {
+      "title": "Hex Encode/Decode",
+      "description": "Convert text to and from hexadecimal.",
+      "errors": {
+        "invalid": "Invalid hex input."
+      }
+    },
+    "caseConverter": {
+      "title": "Case Converter",
+      "description": "Convert text between common case styles.",
+      "labels": {
+        "upper": "UPPERCASE",
+        "lower": "lowercase",
+        "title": "Title Case"
+      }
+    },
+    "timestamp": {
+      "title": "Timestamp Generator",
+      "description": "Current time (or any input) in formats used by Java, Node, Python and more.",
+      "placeholder": "Unix seconds/millis or any parseable date — leave empty for now",
+      "error": "Could not parse that as a date/timestamp.",
+      "fieldLabels": {
+        "unixSeconds": "Unix seconds",
+        "unixMillis": "Unix milliseconds",
+        "iso8601": "ISO 8601",
+        "javaInstant": "Java Instant",
+        "nodeDateNow": "Node Date.now()",
+        "pythonDatetime": "Python datetime",
+        "rfc2822": "RFC 2822"
+      }
+    },
+    "uuidGenerator": {
+      "title": "UUID Generator",
+      "description": "Generate one or many UUID v4 values."
+    },
+    "urlEncoder": {
+      "title": "URL Encode/Decode",
+      "description": "Encode and decode URI components."
+    },
+    "jwtDecoder": {
+      "title": "JWT Decoder",
+      "description": "Decode a JWT's header and payload.",
+      "placeholder": "Paste a JWT...",
+      "warning": "Signature is NOT verified — this only decodes the header and payload. Never treat a decoded-but-unverified token as trusted.",
+      "labels": {
+        "token": "Token",
+        "header": "Header",
+        "payload": "Payload"
+      },
+      "errors": {
+        "malformedToken": "Not a valid JWT (expected 3 dot-separated parts).",
+        "invalidEncoding": "Could not decode token — malformed Base64URL or JSON."
+      }
+    },
+    "hashGenerator": {
+      "title": "Hash Generator",
+      "description": "MD5, SHA-1 and SHA-256 digests of text.",
+      "warning": "MD5 and SHA-1 are broken for security purposes — use them only for checksums, not for passwords or integrity against a malicious actor."
+    }
+  }
+}

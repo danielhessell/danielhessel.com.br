@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ToolLayout } from "@/components/tool-layout";
 import { Panel } from "@/components/panel";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,17 +12,16 @@ function generate(count: number) {
 }
 
 export default function UuidGeneratorPage() {
+  const t = useTranslations("tools.uuidGenerator");
+  const tCommon = useTranslations("common");
   const [count, setCount] = useState(1);
   const [output, setOutput] = useState(() => generate(1));
 
   return (
-    <ToolLayout
-      title="UUID Generator"
-      description="Generate one or many UUID v4 values."
-    >
+    <ToolLayout title={t("title")} description={t("description")}>
       <div className="flex flex-wrap items-center gap-2">
         <label className="text-sm text-foreground/60" htmlFor="count">
-          Count
+          {tCommon("count")}
         </label>
         <input
           id="count"
@@ -35,10 +35,10 @@ export default function UuidGeneratorPage() {
           className="h-9 w-24 rounded-md border border-border bg-background px-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         />
         <Button variant="primary" onClick={() => setOutput(generate(count))}>
-          Generate
+          {tCommon("generate")}
         </Button>
       </div>
-      <Panel label="Result" copyValue={output}>
+      <Panel label={tCommon("result")} copyValue={output}>
         <Textarea rows={12} readOnly value={output} />
       </Panel>
     </ToolLayout>

@@ -1,6 +1,8 @@
 import type { SVGProps } from "react";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 // lucide-react dropped brand/logo icons; inline the GitHub mark instead.
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
@@ -11,7 +13,9 @@ function GithubIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function Navbar() {
+export async function Navbar() {
+  const t = await getTranslations("nav");
+
   return (
     <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
@@ -23,11 +27,12 @@ export function Navbar() {
             href="https://github.com/danielhessell/danielhessel.com.br"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View source on GitHub"
+            aria-label={t("githubLabel")}
             className="flex h-8 w-8 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <GithubIcon width={16} height={16} />
           </a>
+          <LanguageSwitcher />
           <ThemeToggle />
         </div>
       </div>

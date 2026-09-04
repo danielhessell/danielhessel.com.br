@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "githubLabel": "Ver código fuente en GitHub"
+  },
+  "common": {
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "input": "Entrada",
+    "output": "Salida",
+    "preview": "Vista previa",
+    "encode": "Codificar",
+    "decode": "Decodificar",
+    "prettyPrint": "Formatear",
+    "minify": "Minificar",
+    "generate": "Generar",
+    "result": "Resultado",
+    "convert": "Convertir",
+    "count": "Cantidad"
+  },
+  "toolsHub": {
+    "title": "Herramientas Dev",
+    "subtitle": "Pequeñas utilidades que siempre necesito. Todo se ejecuta en tu navegador — nada se envía a un servidor.",
+    "metaTitle": "Herramientas Dev — Daniel Hessel",
+    "metaDescription": "Utilidades cotidianas para desarrolladores."
+  },
+  "tools": {
+    "textCounter": {
+      "title": "Contador de Texto",
+      "description": "Cuenta caracteres, palabras y líneas.",
+      "placeholder": "Pega o escribe el texto aquí...",
+      "stats": {
+        "characters": "Caracteres",
+        "charactersNoSpaces": "Caracteres (sin espacios)",
+        "words": "Palabras",
+        "lines": "Líneas"
+      }
+    },
+    "jsonFormatter": {
+      "title": "Formateador de JSON",
+      "description": "Formatea, minifica y valida JSON."
+    },
+    "xmlFormatter": {
+      "title": "Formateador de XML",
+      "description": "Formatea y minifica XML."
+    },
+    "markdownPreviewer": {
+      "title": "Visor de Markdown",
+      "description": "Vista previa en vivo de Markdown estilo GitHub."
+    },
+    "base64": {
+      "title": "Codificar/Decodificar Base64",
+      "description": "Convierte texto hacia y desde Base64.",
+      "errors": {
+        "invalid": "Entrada Base64 inválida."
+      }
+    },
+    "hex": {
+      "title": "Codificar/Decodificar Hex",
+      "description": "Convierte texto hacia y desde hexadecimal.",
+      "errors": {
+        "invalid": "Entrada hexadecimal inválida."
+      }
+    },
+    "caseConverter": {
+      "title": "Conversor de Mayúsculas/Minúsculas",
+      "description": "Convierte texto entre los estilos de caja más comunes.",
+      "labels": {
+        "upper": "MAYÚSCULAS",
+        "lower": "minúsculas",
+        "title": "Cada Palabra en Mayúscula"
+      }
+    },
+    "timestamp": {
+      "title": "Generador de Timestamp",
+      "description": "Hora actual (o cualquier entrada) en formatos usados por Java, Node, Python y más.",
+      "placeholder": "Segundos/milisegundos Unix o cualquier fecha reconocible — deja vacío para ahora",
+      "error": "No se pudo interpretar eso como fecha/timestamp.",
+      "fieldLabels": {
+        "unixSeconds": "Segundos Unix",
+        "unixMillis": "Milisegundos Unix",
+        "iso8601": "ISO 8601",
+        "javaInstant": "Java Instant",
+        "nodeDateNow": "Node Date.now()",
+        "pythonDatetime": "Python datetime",
+        "rfc2822": "RFC 2822"
+      }
+    },
+    "uuidGenerator": {
+      "title": "Generador de UUID",
+      "description": "Genera uno o varios valores UUID v4."
+    },
+    "urlEncoder": {
+      "title": "Codificar/Decodificar URL",
+      "description": "Codifica y decodifica componentes de URI."
+    },
+    "jwtDecoder": {
+      "title": "Decodificador de JWT",
+      "description": "Decodifica el header y el payload de un JWT.",
+      "placeholder": "Pega un JWT...",
+      "warning": "La firma NO se verifica — esto solo decodifica el header y el payload. Nunca trates un token decodificado pero no verificado como confiable.",
+      "labels": {
+        "token": "Token",
+        "header": "Header",
+        "payload": "Payload"
+      },
+      "errors": {
+        "malformedToken": "JWT inválido (se esperaban 3 partes separadas por punto).",
+        "invalidEncoding": "No se pudo decodificar el token — Base64URL o JSON malformado."
+      }
+    },
+    "hashGenerator": {
+      "title": "Generador de Hash",
+      "description": "Digests MD5, SHA-1 y SHA-256 de texto.",
+      "warning": "MD5 y SHA-1 son inseguros para fines criptográficos — úsalos solo para checksums, no para contraseñas ni integridad contra un actor malicioso."
+    }
+  }
+}

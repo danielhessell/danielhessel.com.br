@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ToolLayout } from "@/components/tool-layout";
 import { Panel } from "@/components/panel";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,34 +13,32 @@ const SAMPLE =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
 
 export default function JwtDecoderPage() {
+  const t = useTranslations("tools.jwtDecoder");
   const [input, setInput] = useState(SAMPLE);
   const result = useMemo(() => decodeJwt(input), [input]);
 
   return (
-    <ToolLayout
-      title="JWT Decoder"
-      description="Decode a JWT's header and payload."
-    >
-      <WarningBanner message="Signature is NOT verified — this only decodes the header and payload. Never treat a decoded-but-unverified token as trusted." />
-      <Panel label="Token">
+    <ToolLayout title={t("title")} description={t("description")}>
+      <WarningBanner message={t("warning")} />
+      <Panel label={t("labels.token")}>
         <Textarea
           rows={4}
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Paste a JWT..."
+          placeholder={t("placeholder")}
         />
       </Panel>
       {result.ok ? (
         <div className="grid gap-4 sm:grid-cols-2">
-          <Panel label="Header" copyValue={result.header}>
+          <Panel label={t("labels.header")} copyValue={result.header}>
             <Textarea rows={8} readOnly value={result.header} />
           </Panel>
-          <Panel label="Payload" copyValue={result.payload}>
+          <Panel label={t("labels.payload")} copyValue={result.payload}>
             <Textarea rows={8} readOnly value={result.payload} />
           </Panel>
         </div>
       ) : (
-        <ErrorBanner message={result.error} />
+        <ErrorBanner message={t(`errors.${result.errorCode}`)} />
       )}
     </ToolLayout>
   );

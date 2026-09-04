@@ -1,0 +1,117 @@
+{
+  "nav": {
+    "githubLabel": "Ver código-fonte no GitHub"
+  },
+  "common": {
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "input": "Entrada",
+    "output": "Saída",
+    "preview": "Pré-visualização",
+    "encode": "Codificar",
+    "decode": "Decodificar",
+    "prettyPrint": "Formatar",
+    "minify": "Minificar",
+    "generate": "Gerar",
+    "result": "Resultado",
+    "convert": "Converter",
+    "count": "Quantidade"
+  },
+  "toolsHub": {
+    "title": "Ferramentas Dev",
+    "subtitle": "Pequenas utilidades que eu sempre preciso. Tudo roda no seu navegador — nada é enviado a um servidor.",
+    "metaTitle": "Ferramentas Dev — Daniel Hessel",
+    "metaDescription": "Utilidades do dia a dia para devs."
+  },
+  "tools": {
+    "textCounter": {
+      "title": "Contador de Texto",
+      "description": "Conte caracteres, palavras e linhas.",
+      "placeholder": "Cole ou digite o texto aqui...",
+      "stats": {
+        "characters": "Caracteres",
+        "charactersNoSpaces": "Caracteres (sem espaços)",
+        "words": "Palavras",
+        "lines": "Linhas"
+      }
+    },
+    "jsonFormatter": {
+      "title": "Formatador de JSON",
+      "description": "Formate, minifique e valide JSON."
+    },
+    "xmlFormatter": {
+      "title": "Formatador de XML",
+      "description": "Formate e minifique XML."
+    },
+    "markdownPreviewer": {
+      "title": "Visualizador de Markdown",
+      "description": "Pré-visualização ao vivo de Markdown no estilo GitHub."
+    },
+    "base64": {
+      "title": "Codificar/Decodificar Base64",
+      "description": "Converta texto de e para Base64.",
+      "errors": {
+        "invalid": "Entrada Base64 inválida."
+      }
+    },
+    "hex": {
+      "title": "Codificar/Decodificar Hex",
+      "description": "Converta texto de e para hexadecimal.",
+      "errors": {
+        "invalid": "Entrada hexadecimal inválida."
+      }
+    },
+    "caseConverter": {
+      "title": "Conversor de Caixa",
+      "description": "Converta texto entre os estilos de caixa mais comuns.",
+      "labels": {
+        "upper": "MAIÚSCULAS",
+        "lower": "minúsculas",
+        "title": "Cada Palavra Maiúscula"
+      }
+    },
+    "timestamp": {
+      "title": "Gerador de Timestamp",
+      "description": "Hora atual (ou qualquer entrada) nos formatos usados por Java, Node, Python e outros.",
+      "placeholder": "Segundos/milissegundos Unix ou qualquer data reconhecível — deixe vazio para agora",
+      "error": "Não foi possível interpretar isso como data/timestamp.",
+      "fieldLabels": {
+        "unixSeconds": "Segundos Unix",
+        "unixMillis": "Milissegundos Unix",
+        "iso8601": "ISO 8601",
+        "javaInstant": "Java Instant",
+        "nodeDateNow": "Node Date.now()",
+        "pythonDatetime": "Python datetime",
+        "rfc2822": "RFC 2822"
+      }
+    },
+    "uuidGenerator": {
+      "title": "Gerador de UUID",
+      "description": "Gere um ou vários valores UUID v4."
+    },
+    "urlEncoder": {
+      "title": "Codificar/Decodificar URL",
+      "description": "Codifique e decodifique componentes de URI."
+    },
+    "jwtDecoder": {
+      "title": "Decodificador de JWT",
+      "description": "Decodifique o header e o payload de um JWT.",
+      "placeholder": "Cole um JWT...",
+      "warning": "A assinatura NÃO é verificada — isso só decodifica o header e o payload. Nunca trate um token decodificado mas não verificado como confiável.",
+      "labels": {
+        "token": "Token",
+        "header": "Header",
+        "payload": "Payload"
+      },
+      "errors": {
+        "malformedToken": "JWT inválido (esperado 3 partes separadas por ponto).",
+        "invalidEncoding": "Não foi possível decodificar o token — Base64URL ou JSON malformado."
+      }
+    },
+    "hashGenerator": {
+      "title": "Gerador de Hash",
+      "description": "Digests MD5, SHA-1 e SHA-256 de texto.",
+      "warning": "MD5 e SHA-1 são inseguros para fins criptográficos — use-os apenas para checksums, não para senhas ou integridade contra um agente malicioso."
+    }
+  }
+}

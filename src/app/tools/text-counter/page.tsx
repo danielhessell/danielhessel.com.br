@@ -1,31 +1,30 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ToolLayout } from "@/components/tool-layout";
 import { Textarea } from "@/components/ui/textarea";
 import { textStats } from "@/lib/formatters/text-stats";
 
 export default function TextCounterPage() {
+  const t = useTranslations("tools.textCounter");
   const [input, setInput] = useState("");
   const stats = textStats(input);
 
   const items = [
-    { label: "Characters", value: stats.characters },
-    { label: "Characters (no spaces)", value: stats.charactersNoSpaces },
-    { label: "Words", value: stats.words },
-    { label: "Lines", value: stats.lines },
+    { label: t("stats.characters"), value: stats.characters },
+    { label: t("stats.charactersNoSpaces"), value: stats.charactersNoSpaces },
+    { label: t("stats.words"), value: stats.words },
+    { label: t("stats.lines"), value: stats.lines },
   ];
 
   return (
-    <ToolLayout
-      title="Text Counter"
-      description="Count characters, words and lines."
-    >
+    <ToolLayout title={t("title")} description={t("description")}>
       <Textarea
         rows={10}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder="Paste or type text here..."
+        placeholder={t("placeholder")}
       />
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {items.map((item) => (
