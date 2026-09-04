@@ -15,7 +15,9 @@
     "generate": "Generate",
     "result": "Result",
     "convert": "Convert",
-    "count": "Count"
+    "count": "Count",
+    "yes": "Yes",
+    "no": "No"
   },
   "toolsHub": {
     "title": "Dev Tools",
@@ -129,6 +131,86 @@
         "added": "Lines added",
         "removed": "Lines removed",
         "unchanged": "Unchanged"
+      }
+    },
+    "certificateChecker": {
+      "title": "Certificate Checker",
+      "description": "Check a digital certificate's validity, issuer and revocation status.",
+      "inputLabel": "Certificate (PEM, DER, or PFX/PKCS#12)",
+      "placeholder": "-----BEGIN CERTIFICATE-----...",
+      "uploadButton": "Upload file",
+      "fileSelected": "File: {name}",
+      "clearFile": "Remove file",
+      "passwordLabel": "PFX/PKCS#12 password",
+      "passwordPlaceholder": "Password (leave empty if none)",
+      "checkButton": "Check",
+      "checking": "Checking...",
+      "disclosureWarning": "Unlike every other tool here, this one is not fully local: it sends the certificate to our server, which contacts the certificate's issuing authority to check its revocation status.",
+      "errors": {
+        "invalidPem": "That doesn't look like a valid certificate.",
+        "invalidPfx": "Could not read that file — check the password or try a different file.",
+        "unexpectedError": "Something went wrong while checking the certificate.",
+        "networkError": "Could not reach the server. Check your connection and try again."
+      },
+      "validity": {
+        "heading": "Validity",
+        "validFrom": "Valid from",
+        "validTo": "Valid to",
+        "daysRemaining": "Days remaining",
+        "status": {
+          "valid": "Valid",
+          "expiringSoon": "Expiring soon",
+          "expired": "Expired",
+          "notYetValid": "Not yet valid"
+        }
+      },
+      "identity": {
+        "heading": "Identity",
+        "subject": "Subject",
+        "issuer": "Issuer",
+        "subjectAltNames": "Subject alternative names",
+        "noSans": "No subject alternative names",
+        "selfSigned": "Self-signed"
+      },
+      "mode": {
+        "label": "Method",
+        "auto": "Automatic",
+        "ocsp": "OCSP",
+        "crl": "CRL"
+      },
+      "revocation": {
+        "heading": "Revocation",
+        "status": {
+          "good": "Good",
+          "revoked": "Revoked",
+          "unknown": "Unknown",
+          "unavailable": "Unavailable"
+        },
+        "method": "Method",
+        "revokedAt": "Revoked at",
+        "thisUpdate": "This update",
+        "nextUpdate": "Next update",
+        "checkedVia": "Checked via",
+        "reason": {
+          "noOcspUrl": "This certificate has no OCSP responder information — revocation status can't be checked.",
+          "ocspRequestFailed": "The OCSP request to the certificate issuer failed or returned no usable answer.",
+          "issuerCertUnavailable": "Could not obtain the issuer's certificate, needed to check revocation.",
+          "noCrlUrl": "This certificate has no CRL distribution point information — revocation status can't be checked.",
+          "crlRequestFailed": "Could not fetch or read the certificate revocation list (CRL)."
+        }
+      },
+      "technicalDetails": {
+        "heading": "Technical details",
+        "serialNumber": "Serial number",
+        "fingerprintSha1": "SHA-1 fingerprint",
+        "fingerprintSha256": "SHA-256 fingerprint",
+        "fingerprintSha512": "SHA-512 fingerprint",
+        "publicKeyAlgorithm": "Public key algorithm",
+        "publicKeySize": "Public key size",
+        "publicKeyCurve": "Curve",
+        "keyUsage": "Key usage",
+        "noKeyUsage": "Not specified",
+        "isCa": "Certificate authority"
       }
     }
   }

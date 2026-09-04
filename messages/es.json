@@ -15,7 +15,9 @@
     "generate": "Generar",
     "result": "Resultado",
     "convert": "Convertir",
-    "count": "Cantidad"
+    "count": "Cantidad",
+    "yes": "Sí",
+    "no": "No"
   },
   "toolsHub": {
     "title": "Herramientas Dev",
@@ -129,6 +131,86 @@
         "added": "Líneas añadidas",
         "removed": "Líneas eliminadas",
         "unchanged": "Sin cambios"
+      }
+    },
+    "certificateChecker": {
+      "title": "Verificador de Certificado",
+      "description": "Verifica la validez, el emisor y el estado de revocación de un certificado digital.",
+      "inputLabel": "Certificado (PEM, DER o PFX/PKCS#12)",
+      "placeholder": "-----BEGIN CERTIFICATE-----...",
+      "uploadButton": "Subir archivo",
+      "fileSelected": "Archivo: {name}",
+      "clearFile": "Quitar archivo",
+      "passwordLabel": "Contraseña del PFX/PKCS#12",
+      "passwordPlaceholder": "Contraseña (deja vacío si no hay)",
+      "checkButton": "Verificar",
+      "checking": "Verificando...",
+      "disclosureWarning": "A diferencia de todas las demás herramientas de aquí, esta no es completamente local: el certificado se envía a nuestro servidor, que contacta a la autoridad emisora del certificado para verificar su estado de revocación.",
+      "errors": {
+        "invalidPem": "Esto no parece ser un certificado válido.",
+        "invalidPfx": "No se pudo leer ese archivo — verifica la contraseña o prueba con otro archivo.",
+        "unexpectedError": "Algo salió mal al verificar el certificado.",
+        "networkError": "No se pudo conectar con el servidor. Verifica tu conexión e inténtalo de nuevo."
+      },
+      "validity": {
+        "heading": "Validez",
+        "validFrom": "Válido desde",
+        "validTo": "Válido hasta",
+        "daysRemaining": "Días restantes",
+        "status": {
+          "valid": "Válido",
+          "expiringSoon": "Por expirar",
+          "expired": "Expirado",
+          "notYetValid": "Aún no válido"
+        }
+      },
+      "identity": {
+        "heading": "Identidad",
+        "subject": "Titular",
+        "issuer": "Emisor",
+        "subjectAltNames": "Nombres alternativos del titular",
+        "noSans": "Sin nombres alternativos",
+        "selfSigned": "Autofirmado"
+      },
+      "mode": {
+        "label": "Método",
+        "auto": "Automático",
+        "ocsp": "OCSP",
+        "crl": "CRL"
+      },
+      "revocation": {
+        "heading": "Revocación",
+        "status": {
+          "good": "Válido",
+          "revoked": "Revocado",
+          "unknown": "Desconocido",
+          "unavailable": "No disponible"
+        },
+        "method": "Método",
+        "revokedAt": "Revocado el",
+        "thisUpdate": "Actualizado el",
+        "nextUpdate": "Próxima actualización",
+        "checkedVia": "Verificado vía",
+        "reason": {
+          "noOcspUrl": "Este certificado no tiene información de respondedor OCSP — no se puede verificar el estado de revocación.",
+          "ocspRequestFailed": "La solicitud OCSP a la autoridad emisora falló o no devolvió una respuesta utilizable.",
+          "issuerCertUnavailable": "No se pudo obtener el certificado del emisor, necesario para verificar la revocación.",
+          "noCrlUrl": "Este certificado no tiene información de punto de distribución de CRL — no se puede verificar el estado de revocación.",
+          "crlRequestFailed": "No se pudo obtener o leer la lista de certificados revocados (CRL)."
+        }
+      },
+      "technicalDetails": {
+        "heading": "Detalles técnicos",
+        "serialNumber": "Número de serie",
+        "fingerprintSha1": "Huella SHA-1",
+        "fingerprintSha256": "Huella SHA-256",
+        "fingerprintSha512": "Huella SHA-512",
+        "publicKeyAlgorithm": "Algoritmo de clave pública",
+        "publicKeySize": "Tamaño de clave pública",
+        "publicKeyCurve": "Curva",
+        "keyUsage": "Uso de la clave",
+        "noKeyUsage": "No especificado",
+        "isCa": "Autoridad certificadora"
       }
     }
   }

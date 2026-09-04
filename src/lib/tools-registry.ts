@@ -11,6 +11,7 @@ import {
   Type,
   Clock,
   FileCode,
+  ShieldCheck,
   Text,
   type LucideIcon,
 } from "lucide-react";
@@ -35,6 +36,7 @@ export const tools: Tool[] = [
   { slug: "jwt-decoder", messageKey: "jwtDecoder", icon: KeyRound },
   { slug: "hash-generator", messageKey: "hashGenerator", icon: Hash },
   { slug: "diff-checker", messageKey: "diffChecker", icon: GitCompare },
+  { slug: "certificate-checker", messageKey: "certificateChecker", icon: ShieldCheck },
 ];
 
 export function getTool(slug: string) {

@@ -15,7 +15,9 @@
     "generate": "Gerar",
     "result": "Resultado",
     "convert": "Converter",
-    "count": "Quantidade"
+    "count": "Quantidade",
+    "yes": "Sim",
+    "no": "Não"
   },
   "toolsHub": {
     "title": "Ferramentas Dev",
@@ -129,6 +131,86 @@
         "added": "Linhas adicionadas",
         "removed": "Linhas removidas",
         "unchanged": "Inalteradas"
+      }
+    },
+    "certificateChecker": {
+      "title": "Verificador de Certificado",
+      "description": "Verifique validade, emissor e status de revogação de um certificado digital.",
+      "inputLabel": "Certificado (PEM, DER ou PFX/PKCS#12)",
+      "placeholder": "-----BEGIN CERTIFICATE-----...",
+      "uploadButton": "Enviar arquivo",
+      "fileSelected": "Arquivo: {name}",
+      "clearFile": "Remover arquivo",
+      "passwordLabel": "Senha do PFX/PKCS#12",
+      "passwordPlaceholder": "Senha (deixe em branco se não houver)",
+      "checkButton": "Verificar",
+      "checking": "Verificando...",
+      "disclosureWarning": "Diferente de todas as outras ferramentas daqui, esta não é 100% local: o certificado é enviado ao nosso servidor, que contata a autoridade emissora do certificado para verificar seu status de revogação.",
+      "errors": {
+        "invalidPem": "Isso não parece ser um certificado válido.",
+        "invalidPfx": "Não foi possível ler esse arquivo — verifique a senha ou tente outro arquivo.",
+        "unexpectedError": "Algo deu errado ao verificar o certificado.",
+        "networkError": "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente."
+      },
+      "validity": {
+        "heading": "Validade",
+        "validFrom": "Válido a partir de",
+        "validTo": "Válido até",
+        "daysRemaining": "Dias restantes",
+        "status": {
+          "valid": "Válido",
+          "expiringSoon": "Expirando em breve",
+          "expired": "Expirado",
+          "notYetValid": "Ainda não válido"
+        }
+      },
+      "identity": {
+        "heading": "Identidade",
+        "subject": "Titular",
+        "issuer": "Emissor",
+        "subjectAltNames": "Nomes alternativos do titular",
+        "noSans": "Nenhum nome alternativo",
+        "selfSigned": "Autoassinado"
+      },
+      "mode": {
+        "label": "Método",
+        "auto": "Automático",
+        "ocsp": "OCSP",
+        "crl": "CRL"
+      },
+      "revocation": {
+        "heading": "Revogação",
+        "status": {
+          "good": "Válido",
+          "revoked": "Revogado",
+          "unknown": "Desconhecido",
+          "unavailable": "Indisponível"
+        },
+        "method": "Método",
+        "revokedAt": "Revogado em",
+        "thisUpdate": "Atualizado em",
+        "nextUpdate": "Próxima atualização",
+        "checkedVia": "Verificado via",
+        "reason": {
+          "noOcspUrl": "Este certificado não possui informações de respondedor OCSP — não é possível verificar o status de revogação.",
+          "ocspRequestFailed": "A requisição OCSP para a autoridade emissora falhou ou não retornou uma resposta utilizável.",
+          "issuerCertUnavailable": "Não foi possível obter o certificado do emissor, necessário para verificar a revogação.",
+          "noCrlUrl": "Este certificado não possui informações de ponto de distribuição de CRL — não é possível verificar o status de revogação.",
+          "crlRequestFailed": "Não foi possível obter ou ler a lista de certificados revogados (CRL)."
+        }
+      },
+      "technicalDetails": {
+        "heading": "Detalhes técnicos",
+        "serialNumber": "Número de série",
+        "fingerprintSha1": "Fingerprint SHA-1",
+        "fingerprintSha256": "Fingerprint SHA-256",
+        "fingerprintSha512": "Fingerprint SHA-512",
+        "publicKeyAlgorithm": "Algoritmo da chave pública",
+        "publicKeySize": "Tamanho da chave pública",
+        "publicKeyCurve": "Curva",
+        "keyUsage": "Uso da chave",
+        "noKeyUsage": "Não especificado",
+        "isCa": "Autoridade certificadora"
       }
     }
   }
