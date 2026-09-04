@@ -4,6 +4,7 @@ import {
   Code2,
   FileText,
   Fingerprint,
+  GitCompare,
   Hash,
   KeyRound,
   Link2,
@@ -33,6 +34,7 @@ export const tools: Tool[] = [
   { slug: "url-encoder", messageKey: "urlEncoder", icon: Link2 },
   { slug: "jwt-decoder", messageKey: "jwtDecoder", icon: KeyRound },
   { slug: "hash-generator", messageKey: "hashGenerator", icon: Hash },
+  { slug: "diff-checker", messageKey: "diffChecker", icon: GitCompare },
 ];
 
 export function getTool(slug: string) {

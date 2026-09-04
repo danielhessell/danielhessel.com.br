@@ -50,6 +50,7 @@
     "base64": {
       "title": "Base64 Encode/Decode",
       "description": "Convert text to and from Base64.",
+      "jsonDetected": "JSON detected",
       "errors": {
         "invalid": "Invalid Base64 input."
       }
@@ -112,6 +113,22 @@
       "title": "Hash Generator",
       "description": "MD5, SHA-1 and SHA-256 digests of text.",
       "warning": "MD5 and SHA-1 are broken for security purposes — use them only for checksums, not for passwords or integrity against a malicious actor."
+    },
+    "diffChecker": {
+      "title": "Diff Checker",
+      "description": "Compare two files or blocks of text and see what changed.",
+      "placeholder": "Paste or type text here...",
+      "uploadFile": "Upload file",
+      "uploadBoth": "Upload both files",
+      "labels": {
+        "original": "Original",
+        "modified": "Modified"
+      },
+      "stats": {
+        "added": "Lines added",
+        "removed": "Lines removed",
+        "unchanged": "Unchanged"
+      }
     }
   }
 }

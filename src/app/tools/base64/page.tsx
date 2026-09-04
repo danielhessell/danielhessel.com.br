@@ -20,6 +20,15 @@ export default function Base64Page() {
     [input, mode],
   );
 
+  const output = useMemo(() => {
+    if (!result.ok || mode !== "decode") return null;
+    try {
+      return { value: JSON.stringify(JSON.parse(result.value), null, 2), isJson: true };
+    } catch {
+      return { value: result.value, isJson: false };
+    }
+  }, [result, mode]);
+
   return (
     <ToolLayout title={t("title")} description={t("description")}>
       <div className="flex gap-2">
@@ -44,9 +53,21 @@ export default function Base64Page() {
             onChange={(e) => setInput(e.target.value)}
           />
         </Panel>
-        <Panel label={tCommon("output")} copyValue={result.ok ? result.value : ""}>
+        <Panel
+          label={
+            <span className="flex items-center gap-2">
+              {tCommon("output")}
+              {output?.isJson && (
+                <span className="rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium normal-case tracking-normal text-accent">
+                  {t("jsonDetected")}
+                </span>
+              )}
+            </span>
+          }
+          copyValue={result.ok ? (output?.value ?? result.value) : ""}
+        >
           {result.ok ? (
-            <Textarea rows={10} readOnly value={result.value} />
+            <Textarea rows={10} readOnly value={output?.value ?? result.value} />
           ) : (
             <ErrorBanner message={t("errors.invalid")} />
           )}

@@ -6,7 +6,7 @@ export function Panel({
   copyValue,
   children,
 }: {
-  label: string;
+  label: ReactNode;
   copyValue?: string;
   children: ReactNode;
 }) {
