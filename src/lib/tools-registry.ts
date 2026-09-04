@@ -2,6 +2,7 @@ import {
   Binary,
   Braces,
   Code2,
+  FileSpreadsheet,
   FileText,
   Fingerprint,
   GitCompare,
@@ -37,6 +38,7 @@ export const tools: Tool[] = [
   { slug: "hash-generator", messageKey: "hashGenerator", icon: Hash },
   { slug: "diff-checker", messageKey: "diffChecker", icon: GitCompare },
   { slug: "certificate-checker", messageKey: "certificateChecker", icon: ShieldCheck },
+  { slug: "csv-yaml-json", messageKey: "csvYamlJson", icon: FileSpreadsheet },
 ];
 
 export function getTool(slug: string) {

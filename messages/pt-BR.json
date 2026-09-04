@@ -212,6 +212,22 @@
         "noKeyUsage": "Não especificado",
         "isCa": "Autoridade certificadora"
       }
+    },
+    "csvYamlJson": {
+      "title": "CSV/YAML ↔ JSON",
+      "description": "Converta entre CSV, YAML e JSON.",
+      "placeholder": "Cole CSV, YAML ou JSON aqui...",
+      "modes": {
+        "csvToJson": "CSV para JSON",
+        "jsonToCsv": "JSON para CSV",
+        "yamlToJson": "YAML para JSON",
+        "jsonToYaml": "JSON para YAML"
+      },
+      "errors": {
+        "invalidCsv": "Não foi possível interpretar isso como CSV.",
+        "invalidYaml": "Não foi possível interpretar isso como YAML.",
+        "invalidJson": "Não foi possível interpretar isso como JSON."
+      }
     }
   }
 }
