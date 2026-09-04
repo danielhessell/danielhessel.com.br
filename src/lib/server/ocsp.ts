@@ -2,6 +2,7 @@ import { webcrypto, X509Certificate } from "node:crypto";
 import * as pkijs from "pkijs";
 import { safeFetch } from "@/lib/server/safe-fetch";
 import { toPkijsCertificate } from "@/lib/server/pkijs-cert";
+import { tryParsePkcs7Certificate } from "@/lib/server/pkcs7";
 import type { RevocationInfo } from "@/lib/certificate-check-types";
 
 let engineReady = false;
@@ -30,9 +31,19 @@ export async function checkRevocationViaOcsp(
 
   let issuerCert: X509Certificate;
   try {
-    const issuerBytes = await safeFetch(caIssuersUrl);
-    issuerCert = new X509Certificate(Buffer.from(issuerBytes));
-  } catch {
+    const issuerBytes = Buffer.from(await safeFetch(caIssuersUrl));
+    try {
+      // Bare DER/PEM — the common case for Web PKI CAs.
+      issuerCert = new X509Certificate(issuerBytes);
+    } catch {
+      // Some CAs (notably non-Web-PKI ones, e.g. government/corporate PKI
+      // providers) answer CA Issuers with a certs-only PKCS#7 bundle instead.
+      const parsed = tryParsePkcs7Certificate(issuerBytes);
+      if (!parsed) throw new Error("issuer bytes are neither DER/PEM nor PKCS#7");
+      issuerCert = parsed;
+    }
+  } catch (err) {
+    console.error("[certificate-check] CA Issuers fetch/parse failed:", caIssuersUrl, err);
     return { status: "unavailable", reason: "issuerCertUnavailable" };
   }
 
@@ -95,7 +106,8 @@ export async function checkRevocationViaOcsp(
       revokedAt,
       checkedVia: ocspUrl,
     };
-  } catch {
+  } catch (err) {
+    console.error("[certificate-check] OCSP request/response failed:", ocspUrl, err);
     return { status: "unavailable", reason: "ocspRequestFailed" };
   }
 }

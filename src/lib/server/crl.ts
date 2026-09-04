@@ -67,7 +67,8 @@ export async function checkRevocationViaCrl(cert: X509Certificate): Promise<Revo
         revokedAt,
         checkedVia: url,
       };
-    } catch {
+    } catch (err) {
+      console.error("[certificate-check] CRL fetch/parse failed:", url, err);
       // try the next distribution point, if any
     }
   }
