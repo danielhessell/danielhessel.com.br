@@ -12,6 +12,7 @@
     "decode": "Decode",
     "prettyPrint": "Pretty-print",
     "minify": "Minify",
+    "syntaxHighlight": "Syntax highlight",
     "generate": "Generate",
     "result": "Result",
     "convert": "Convert",

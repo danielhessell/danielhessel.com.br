@@ -8,13 +8,16 @@ import { ResizableSplit } from "@/components/resizable-split";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { ErrorBanner } from "@/components/error-banner";
+import { CodeOutput } from "@/components/code-output";
 import { formatXmlPretty, minifyXml } from "@/lib/formatters/xml";
+import { highlightXml } from "@/lib/highlight/xml";
 
 export default function XmlFormatterPage() {
   const t = useTranslations("tools.xmlFormatter");
   const tCommon = useTranslations("common");
   const [input, setInput] = useState("<root><child>value</child></root>");
   const [mode, setMode] = useState<"format" | "minify">("format");
+  const [highlight, setHighlight] = useState(false);
 
   const result = useMemo(
     () => (mode === "format" ? formatXmlPretty(input) : minifyXml(input)),
@@ -36,6 +39,12 @@ export default function XmlFormatterPage() {
         >
           {tCommon("minify")}
         </Button>
+        <Button
+          variant={highlight ? "primary" : "secondary"}
+          onClick={() => setHighlight((h) => !h)}
+        >
+          {tCommon("syntaxHighlight")}
+        </Button>
       </div>
       <ResizableSplit
         left={
@@ -50,7 +59,9 @@ export default function XmlFormatterPage() {
         right={
           <Panel label={tCommon("output")} copyValue={result.ok ? result.value : ""}>
             {result.ok ? (
-              <Textarea rows={16} readOnly value={result.value} />
+              <CodeOutput
+                segments={highlight ? highlightXml(result.value) : [{ text: result.value }]}
+              />
             ) : (
               <ErrorBanner message={result.error} />
             )}
