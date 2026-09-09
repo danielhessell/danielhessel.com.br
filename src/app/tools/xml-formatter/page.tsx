@@ -11,13 +11,14 @@ import { ErrorBanner } from "@/components/error-banner";
 import { CodeOutput } from "@/components/code-output";
 import { formatXmlPretty, minifyXml } from "@/lib/formatters/xml";
 import { highlightXml } from "@/lib/highlight/xml";
+import { useSyntaxHighlight } from "@/components/syntax-highlight-provider";
 
 export default function XmlFormatterPage() {
   const t = useTranslations("tools.xmlFormatter");
   const tCommon = useTranslations("common");
   const [input, setInput] = useState("<root><child>value</child></root>");
   const [mode, setMode] = useState<"format" | "minify">("format");
-  const [highlight, setHighlight] = useState(false);
+  const { enabled: highlight } = useSyntaxHighlight();
 
   const result = useMemo(
     () => (mode === "format" ? formatXmlPretty(input) : minifyXml(input)),
@@ -38,12 +39,6 @@ export default function XmlFormatterPage() {
           onClick={() => setMode("minify")}
         >
           {tCommon("minify")}
-        </Button>
-        <Button
-          variant={highlight ? "primary" : "secondary"}
-          onClick={() => setHighlight((h) => !h)}
-        >
-          {tCommon("syntaxHighlight")}
         </Button>
       </div>
       <ResizableSplit

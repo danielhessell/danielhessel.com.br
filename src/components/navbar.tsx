@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { SyntaxHighlightToggle } from "@/components/syntax-highlight-toggle";
 
 // lucide-react dropped brand/logo icons; inline the GitHub mark instead.
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
@@ -32,6 +33,7 @@ export async function Navbar() {
           >
             <GithubIcon width={16} height={16} />
           </a>
+          <SyntaxHighlightToggle />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
